@@ -12,12 +12,26 @@ end
 
 task :init do
   if windows?
-    Dir.chdir(File.join(ENV["HOME"], "vimfiles"))
-    `git submodule init`
-    `git submodule update`
+    # TODO: THIS DOESN'T WORK.
+    #Dir.chdir(File.join(ENV["HOME"], "vimfiles"))
+    #`git submodule init`
+    #`git submodule update`
+    # TODO: LOOKS LIKE mklink REQURIES SOME PRIVILEGE.
+    #Dir.chdir(ENV["HOME"])
+    #`mklink _vimrc vimfiles\\vimrc`
+    #`mklink _gvimrc vimfiles\\gvimrc`
+    
+    # WORKAROUND
     Dir.chdir(ENV["HOME"])
     FileUtils.cp("vimfiles/vimrc", "_vimrc")
-    FileUtils.cp("gvimfiles/gvimrc", "_gvimrc")
+    FileUtils.cp("vimfiles/gvimrc", "_gvimrc")
+    puts <<EOS
+Run following commands:
+cd vimfiles
+git submodule init
+git submodule update
+vim -c NeoBundleInstall
+EOS
   else
     Dir.chdir(File.join(ENV["HOME"], "vimfiles"))
     `git submodule init`
@@ -26,6 +40,10 @@ task :init do
     `ln -sf vimfiles .vim`
     `ln -sf vimfiles/vimrc .vimrc`
     `ln -sf vimfiles/gvimrc .gvimrc`
+    puts <<EOS
+Run following command:
+vim -c NeoBundleInstall
+EOS
   end
 end
 
