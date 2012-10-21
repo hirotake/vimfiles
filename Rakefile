@@ -30,7 +30,7 @@ Run following commands:
 cd vimfiles
 git submodule init
 git submodule update
-vim -c NeoBundleInstall
+vim -c NeoBundleInstall -c quit
 EOS
   else
     Dir.chdir(File.join(ENV["HOME"], "vimfiles"))
@@ -40,10 +40,7 @@ EOS
     `ln -sf vimfiles .vim`
     `ln -sf vimfiles/vimrc .vimrc`
     `ln -sf vimfiles/gvimrc .gvimrc`
-    puts <<EOS
-Run following command:
-vim -c NeoBundleInstall
-EOS
+    `vim -c NeoBundleInstall -c quit`
   end
 end
 
