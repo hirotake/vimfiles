@@ -6,7 +6,7 @@ if has('vim_starting')
   set runtimepath+=~/vimfiles/bundle/neobundle.vim/
 endif
 
-call neobundle#rc(expand('~/.vim/bundle/'))
+call neobundle#rc(expand('~/vimfiles/bundle/'))
 
 " Let NeoBundle manage NeoBundle
 "NeoBundle 'Shougo/neobundle.vim'
