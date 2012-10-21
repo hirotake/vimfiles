@@ -4,8 +4,8 @@ require "fileutils"
 task :init do
   if RUBY_PLATFORM =~ /mswin32|cygwin|mingw|bccwin/
     Dir.chdir(ENV["HOME"])
-    `ln -s vimfiles/vimrc .vimrc`
-    `ln -s vimfiles/gvimrc .gvimrc`
+    `ln -s vimfiles/vimrc _vimrc`
+    `ln -s vimfiles/gvimrc _gvimrc`
   else
     Dir.chdir(ENV["HOME"])
     `ln -s vimfiles .vim`
