@@ -35,8 +35,19 @@ task :clean do
     `del _vimrc _gvimrc`
   else
     Dir.chdir(ENV["HOME"])
-    `rm .vimrc .gvimrc`
+    `rm -fr .vimrc .gvimrc .vim`
   end
 end
+
+task :clean_all => [:clean] do
+  if windows?
+    Dir.chdir(ENV["HOME"])
+    `del /s /q vimfiles`
+  else
+    Dir.chdir(ENV["HOME"])
+    `rm -fr vimfiles`
+  end
+end
+
 
 # vim: ft=ruby ts=2 sw=2 sts=2 expandtab
