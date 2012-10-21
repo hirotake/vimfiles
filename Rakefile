@@ -4,14 +4,16 @@ require "fileutils"
 task :init do
   if RUBY_PLATFORM =~ /mswin32|cygwin|mingw|bccwin/
     Dir.chdir(File.join(ENV["HOME"], "vimfiles"))
+    `git submodule init`
     `git submodule update`
     Dir.chdir(ENV["HOME"])
-    `ln -s vimfiles/vimrc _vimrc`
-    `ln -s vimfiles/gvimrc _gvimrc`
+    FileUtils.cp("vimfiles/vimrc", "_vimrc")
+    FileUtils.cp("gvimfiles/gvimrc", "_gvimrc")
   else
     Dir.chdir(File.join(ENV["HOME"], "vimfiles"))
-    Dir.chdir(ENV["HOME"])
+    `git submodule init`
     `git submodule update`
+    Dir.chdir(ENV["HOME"])
     `ln -s vimfiles .vim`
     `ln -s vimfiles/vimrc .vimrc`
     `ln -s vimfiles/gvimrc .gvimrc`
