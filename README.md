@@ -14,6 +14,8 @@ rake -f vimfiles/Rakefile init
 Instead of using rake command, you just need to create symbolic links as .vim, .vimrc, and .gvimrc against vimfiles, vimfiles/vimrc, and vimfiles/gvimrc, respectively.
 
 <pre><code>
+cd
+git clone https://github.com/hirotake/vimfiles.git
 cd vimfiles
 git submodule init
 git submodule update
