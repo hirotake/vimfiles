@@ -48,3 +48,47 @@ if neobundle#exists_not_installed_bundles()
   echomsg 'Please execute ":NeoBundleInstall" command.'
   "finish
 endif
+
+set nocp nobackup noeb
+set shortmess+=I
+set expandtab
+set ts=4
+set sw=4
+set autoindent
+set ic
+set nu
+set clipboard=unnamed
+set scrolloff=3
+set printoptions=number:y,wrap:y
+set laststatus=2
+
+" Map
+vmap / y/<C-R>"<CR>
+map ,n :nohl<CR>
+map ,u :set notextmode fenc=utf-8<CR>
+nmap <C-S-tab> :tabprevious<cr>
+nmap <C-tab> :tabnext<cr>
+map <C-S-tab> :tabprevious<cr>
+map <C-tab> :tabnext<cr>
+imap <C-S-tab> <ESC>:tabprevious<cr>i
+imap <C-tab> <ESC>:tabnext<cr>i
+"map <C-w> :tabclose<cr>
+nmap <C-t> :tabnew<cr>
+imap <C-t> <ESC>:tabnew<cr>
+
+" Custom Status Line
+function! GetStatusEx()
+ let str = ''
+ let str = str . '[' . &fileformat . ']'
+ if has('multi_byte') && &fileencoding != ''
+ let str = str . '[' . &fileencoding . ']'
+ endif
+ return str
+endfunction
+set statusline=%<%f\ %m%r%h%w%{GetStatusEx()}\ \ \ ,%c%V%8P\ ascii:%b\ \ \ %{strftime(\"%Y/%m/%d\ -\ %H:%M\")}
+function! VimCmdOutput(cmd)
+  redir @*
+  silent exec a:cmd
+  return @*
+endfunction
+
